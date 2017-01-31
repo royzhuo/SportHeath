@@ -1,5 +1,6 @@
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Transaction;
 
 /**
@@ -42,5 +43,25 @@ public class TestRedis {
         TX tx = new TX();
         boolean isSuccess = tx.testTransMoney(jedis);
         System.out.println("is Success:" + isSuccess);
+    }
+
+    @Test
+    public void testJedisPool() {
+        JedisPool jedisPool1 = JedisPoolUtil.getInstance();
+        JedisPool jedisPool2 = JedisPoolUtil.getInstance();
+        System.out.println(jedisPool1 == jedisPool2);
+        Jedis jedis = jedisPool1.getResource();
+        Jedis jedis2 = jedisPool1.getResource();
+        System.out.println(jedis == jedis2);
+        try {
+            jedis.set("jjjjj", "ksdjkslf");
+            jedis2.set("j2", "j2");
+            jedis2.set("jjjjj", "jj");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JedisPoolUtil.realse(jedisPool1, jedis);
+        }
+
     }
 }
