@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.beStrong">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestControllerAdvice"/>
+    </context:component-scan>
+
+<!--    <context:property-placeholder location="classpath:db.properties"/>
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="user" value="${user}"/>
+        <property name="password" value="${pwd}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="driverClass" value="${driver}"/>
+        <property name="initialPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+        <property name="minPoolSize" value="5"/>
+        &lt;!&ndash;当连接池调用对像被用调用完，等待时间 0代表无限等待，易引发进程死锁&ndash;&gt;
+        <property name="checkoutTimeout" value="1000"/>
+        &lt;!&ndash;获取连接失败的重试次数&ndash;&gt;
+        <property name="acquireRetryAttempts" value="2"/>
+    </bean>-->
 </beans>
