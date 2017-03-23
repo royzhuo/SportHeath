@@ -11,6 +11,16 @@
 
     <properties>
         <spring.version>4.3.3.RELEASE</spring.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jstl.version>1.2</jstl.version>
+        <jackson.version>2.8.1</jackson.version>
+        <log4j.version>1.7.2</log4j.version>
+        <junit.version>4.11</junit.version>
+        <jedis.version>2.9.0</jedis.version>
+        <springdata.version>1.7.1.RELEASE</springdata.version>
+        <hibernate.version>4.3.3.Final</hibernate.version>
+        <hibernateJPA.version>4.3.3.Final</hibernateJPA.version>
+        <mysqlDriver.version>5.1.27</mysqlDriver.version>
     </properties>
 
     <dependencies>
@@ -18,7 +28,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <!--配置日志-->
@@ -26,23 +36,23 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.2</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.2</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.2</version>
+            <version>${log4j.version}</version>
         </dependency>
         <!--配置mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.27</version>
+            <version>${mysqlDriver.version}</version>
         </dependency>
         <!--配置c3p0数据源-->
         <dependency>
@@ -54,12 +64,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.3.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.3.Final</version>
+            <version>${hibernateJPA.version}</version>
         </dependency>
 
         <!--配置spring-->
@@ -127,27 +137,39 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.7.1.RELEASE</version>
+            <version>${springdata.version}</version>
         </dependency>
         <!--json-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.8.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.8.1</version>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!--redis集成-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>${jedis.version}</version>
         </dependency>
 
+        <!--servlet api-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
 
     </dependencies>
     <build>

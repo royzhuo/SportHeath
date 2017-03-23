@@ -27,9 +27,8 @@
     <!--搜索不到的时候走下面个视图-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="order" value="2"/>
-        <property name="viewClass" value="Jorg.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="www/view/"/>
-        <property name="suffix" value=".html"/>
+        <property name="prefix" value="/www/view/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 <!--开启spring mvc-->
 <mvc:annotation-driven>
@@ -39,5 +38,6 @@
     </mvc:message-converters>
 </mvc:annotation-driven>
 
+    <mvc:default-servlet-handler/>
 
 </beans>
