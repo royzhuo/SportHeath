@@ -1,26 +1,35 @@
 package com.beStrong.service;
 
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by roy on 2017/3/23.
  */
 @Service
-public interface CheckLoginService {
+public class CheckLoginService {
 
-/*    public boolean checkLogin(String username,String pwd,HttpServletResponse response){
-        if (username.equals("roy")&&pwd.equals("123")){
-            Cookie cookie=new Cookie("royCookie","roysso");
-            response.addCookie(cookie);
-            return true;
+    public boolean checkLogin(String username, String pwd) {
+        if (null != username && null != pwd) {
+            if (username.equals("roy") && pwd.equals("123")) {
+
+                return true;
+            }
         }
         return false;
-    }*/
+    }
 
-public boolean checkUserLogin(String username,String pwd);
+    public boolean checkCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("roy") && cookie.getValue().equals("royLogin")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

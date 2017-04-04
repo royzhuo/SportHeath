@@ -29,4 +29,6 @@
 
     <!--Aop-->
     <aop:aspectj-autoproxy/>
+    <!--配置jpa-->
+
 </beans>

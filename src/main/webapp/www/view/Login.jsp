@@ -12,9 +12,11 @@
 </head>
 <body>
 用户登入:<br>
-<form action="/userLogin" method="post">
+
+<form action="userLogin" method="get">
     <input type="text" name="name" placeholder="用户名"><br>
     <input type="password" name="pwd" placeholder="密码"><br>
+    <input type="hidden" name="goUrl" value="${goUrl}">
     <input type="submit" value="登录"/>
 </form>
 </body>
