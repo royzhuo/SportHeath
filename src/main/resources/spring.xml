@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/tx
+             http://www.springframework.org/schema/tx/spring-tx.xsd
+             http://www.springframework.org/schema/data/jpa
+             http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:component-scan base-package="com.beStrong">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -12,7 +23,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestControllerAdvice"/>
     </context:component-scan>
 
-<!--    <context:property-placeholder location="classpath:db.properties"/>
+    <context:property-placeholder location="classpath:db.properties"/>
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
         <property name="user" value="${user}"/>
         <property name="password" value="${pwd}"/>
@@ -21,14 +32,38 @@
         <property name="initialPoolSize" value="10"/>
         <property name="maxPoolSize" value="50"/>
         <property name="minPoolSize" value="5"/>
-        &lt;!&ndash;当连接池调用对像被用调用完，等待时间 0代表无限等待，易引发进程死锁&ndash;&gt;
+        <!--当连接池调用对像被用调用完，等待时间 0代表无限等待，易引发进程死锁-->
         <property name="checkoutTimeout" value="1000"/>
-        &lt;!&ndash;获取连接失败的重试次数&ndash;&gt;
+        <!--获取连接失败的重试次数-->
         <property name="acquireRetryAttempts" value="2"/>
-    </bean>-->
+    </bean>
 
     <!--Aop-->
     <aop:aspectj-autoproxy/>
     <!--配置jpa-->
-
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置jpa运营商适配器-->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <!--包扫描器-->
+        <property name="packagesToScan" value="com.beStrong.entity"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            </props>
+        </property>
+    </bean>
+    <!--配置jpa事物管理器-->
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <!--开启事物注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--整合springdata-->
+    <jpa:repositories base-package="com.beStrong.dao" entity-manager-factory-ref="entityManagerFactory"/>
 </beans>
