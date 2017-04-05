@@ -1,7 +1,13 @@
 package com.beStrong.entity;
 
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
@@ -17,6 +23,7 @@ public class User {
     private String sprot_id;
     private String nickname;
     private String realName;
+    private String pwd;
     private int age;//年龄
     private double weight;//体重
     private double height;//身高
@@ -27,9 +34,10 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    public User(String nickname, String realName, int age, double weight, double height, Date birthDay, Date createTime) {
+    public User(String nickname, String realName, String pwd, int age, double weight, double height, Date birthDay, Date createTime) {
         this.nickname = nickname;
         this.realName = realName;
+        this.pwd = pwd;
         this.age = age;
         this.weight = weight;
         this.height = height;
@@ -40,20 +48,41 @@ public class User {
     public User() {
     }
 
+    public User(String sprot_id, String nickname, String realName, String pwd, int age, double weight, double height, Date birthDay, Date createTime, Date updateTime) {
+        this.sprot_id = sprot_id;
+        this.nickname = nickname;
+        this.realName = realName;
+        this.pwd = pwd;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        this.birthDay = birthDay;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", sprot_id='" + sprot_id + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", realName='" + realName + '\'' +
-                ", age=" + age +
-                ", weight=" + weight +
-                ", height=" + height +
-                ", birthDay=" + birthDay +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+            "id=" + id +
+            ", sprot_id='" + sprot_id + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", realName='" + realName + '\'' +
+            ", age=" + age +
+            ", weight=" + weight +
+            ", height=" + height +
+            ", birthDay=" + birthDay +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            '}';
     }
 
     public Integer getId() {
