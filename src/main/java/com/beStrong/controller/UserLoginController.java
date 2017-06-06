@@ -62,4 +62,14 @@ public class UserLoginController {
         attributes.addAttribute("goUrl", goUrl);
         return "redirect:/userLogin";
     }
+
+
+    @RequestMapping(value = "/api/admin/login", method = RequestMethod.GET)
+    public String adminLogin(@RequestParam(value = "name") String name, @RequestParam(value = "pwd") String pwd) {
+        if (name.equals("admin") && pwd.equals("123")) {
+            return "FileUpload";
+        } else return null;
+
+
+    }
 }

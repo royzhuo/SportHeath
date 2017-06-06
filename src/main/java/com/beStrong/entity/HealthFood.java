@@ -1,9 +1,12 @@
 package com.beStrong.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.io.InputStream;
 
 /**
  * @author roy.zhuo
@@ -17,6 +20,27 @@ public class HealthFood {
     private String name;
     private String imageUrl;
     private String content;
+
+    private byte[] photo;
+    @Transient
+    private InputStream photoInps;
+
+    @Column(columnDefinition = "binary")
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public InputStream getPhotoInps() {
+        return photoInps;
+    }
+
+    public void setPhotoInps(InputStream photoInps) {
+        this.photoInps = photoInps;
+    }
 
     public String getImageUrl() {
         return imageUrl;

@@ -50,10 +50,7 @@ public class User {
     @JoinColumn(name = "user_id")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Sport> sports;
-    @JoinColumn(name = "user_id")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 
-    private List<HealthFood> foods;
 
     public User(String nickname, String realName, String pwd, int age, double weight, double height, Date birthDay, Date createTime) {
         this.nickname = nickname;
@@ -82,13 +79,6 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public List<HealthFood> getFoods() {
-        return foods;
-    }
-
-    public void setFoods(List<HealthFood> foods) {
-        this.foods = foods;
-    }
 
     public List<Sport> getSports() {
         return sports;

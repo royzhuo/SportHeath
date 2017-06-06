@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * @author roy.zhuo
@@ -19,23 +22,15 @@ public class Share {
 
     private String name;
     private String content;
-    private String icon;
-    private byte[] files;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
-    public byte[] getFiles() {
-        return files;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setFiles(byte[] files) {
-        this.files = files;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getId() {

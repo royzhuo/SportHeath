@@ -46,8 +46,7 @@ public class UserService {
             user.setCreateTime(new Date());
             try {
                 userDao.save(user);
-                map.put("code", "200");
-                map.put("message", "注册成功");
+
             } catch (Exception e) {
                 map.put("code", "500");
                 map.put("message", "添加失败");
